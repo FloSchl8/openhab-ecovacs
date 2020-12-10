@@ -1,0 +1,19 @@
+Frame label=Ecovacs {
+    Text item=ecovacs_1_battery_level icon="battery" 
+                                        valuecolor=[ecovacs_1_battery_level >98="green",>50="orange",<=50="red"]
+    Text item=ecovacs_1_vacuum_status { 
+        Text item=ecovacs_1_battery_level icon="battery" 
+                                        valuecolor=[ecovacs_1_battery_level >98="green",>50="orange",<=50="red"]
+        Text item=ecovacs_1_fan_speed icon="fan"
+        Text item=ecovacs_1_main_brush
+        Text item=ecovacs_1_side_brush
+        Text item=ecovacs_1_filter
+        Text item=ecovacs_1_water_level 
+        Switch item=ecovacs_1_mop_attached
+        Text item=ecovacs_1_stats_area  
+        Text item=ecovacs_1_stats_time  
+        Text item=ecovacs_1_stats_type
+        Image item=ecovacs_1_last_clean_image
+        Switch item=ecovacs_1_command label="Ecovacs Command" mappings=[Clean="Clean", CleanPause="Pause", CleanResume="Resume" Stop="Stop", Charge="Charge", PlaySound="Play Sound", Relocate="Relocate", GetCleanLogs="Get Clean Logs", SetFanSpeed="Set fanspeed to 'normal'"]
+    }
+}

@@ -1,0 +1,44 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "env": {
+                "email": "your_ecovacs_email",
+                "password": "ecovacs_password",
+                "device_id": "randomd_device_id",
+                "country": "your_country",
+                "continent": "your_continent",
+                "verify_ssl": "True",
+                "mqtt_client_id": "client_name",
+                "mqtt_client_host": "host_or_ip_of_mqtt_broker",
+                "mqtt_client_port": "mqtt_port",
+                "mqtt_client_keepalive": "keep_alive_in_seconds",
+                "mqtt_client_bind_address": "",
+                "mqtt_client_root_topic": "root_topic_name"
+            }
+        },
+        {
+            "name": "Docker: Python - General",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "python": {
+                "pathMappings": [
+                    {
+                        "localRoot": "${workspaceFolder}",
+                        "remoteRoot": "/app"
+                    }
+                ],
+                "projectType": "general"
+            }
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+Group GEcovacs
+Number ecovacs_1_battery_level  "Battery Level [%.0f %%]" { channel="mqtt:topic:mosquitto:EcovacsTopic:ecovacs_1_battery_level"}
+String ecovacs_1_vacuum_status  "Vacuum Status [%s]"      { channel="mqtt:topic:mosquitto:EcovacsTopic:ecovacs_1_vacuum_status" }
+String ecovacs_1_fan_speed      "Fan Speed [%s]"          { channel="mqtt:topic:mosquitto:EcovacsTopic:ecovacs_1_fan_speed" }
+Number ecovacs_1_main_brush     "Main Brush [%.0f %%]"    { channel="mqtt:topic:mosquitto:EcovacsTopic:ecovacs_1_main_brush" }
+Number ecovacs_1_side_brush     "Side Brush [%.0f %%]"    { channel="mqtt:topic:mosquitto:EcovacsTopic:ecovacs_1_side_brush" }
+Number ecovacs_1_filter         "Filter [%.0f %%]"        { channel="mqtt:topic:mosquitto:EcovacsTopic:ecovacs_1_filter" }
+String ecovacs_1_water_level    "Water Level [%s]"        { channel="mqtt:topic:mosquitto:EcovacsTopic:ecovacs_1_water_level" }
+Switch ecovacs_1_mop_attached   "Mop Attached [%s]"       { channel="mqtt:topic:mosquitto:EcovacsTopic:ecovacs_1_mop_attached" }
+Number ecovacs_1_stats_area     "Area cleaned [%.0f]"     { channel="mqtt:topic:mosquitto:EcovacsTopic:ecovacs_1_stats_area" }
+Number ecovacs_1_stats_time     "Time needed [%.0f]"      { channel="mqtt:topic:mosquitto:EcovacsTopic:ecovacs_1_stats_time" }
+String ecovacs_1_stats_type     "Cleaing type [%s]"       { channel="mqtt:topic:mosquitto:EcovacsTopic:ecovacs_1_stats_type" }
+String ecovacs_1_last_clean_image "Cleaning Map"          { channel="mqtt:topic:mosquitto:EcovacsTopic:ecovacs_1_last_clean_image" }
+String ecovacs_1_command        "Ecovacs 1 Command"       { channel="mqtt:topic:mosquitto:EcovacsTopic:ecovacs_1_command" }

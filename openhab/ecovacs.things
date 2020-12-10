@@ -1,0 +1,22 @@
+Bridge mqtt:broker:mosquitto "MQTT Broker Bridge" [ host="hostname",
+                                    port=1883,
+                                    secure=false,
+                                    clientId="OpenHAB2"]
+    {
+    Thing topic EcovacsTopic "Ecovacs" @ "Vacuum" {
+        Channels:
+            Type number : ecovacs_1_battery_level "Ecovacs 01 Battery Level" [ stateTopic="ecovacs/e136ef3d-b9b2-4b97-a246-d4de8d474fe9/battery_level" ]
+            Type string : ecovacs_1_vacuum_status "Ecovacs 01 Vacuum Status" [ stateTopic="ecovacs/e136ef3d-b9b2-4b97-a246-d4de8d474fe9/status" ]
+            Type string : ecovacs_1_fan_speed     "Ecovacs 01 Fan Speed"     [ stateTopic="ecovacs/e136ef3d-b9b2-4b97-a246-d4de8d474fe9/fanspeed" ]
+            Type number : ecovacs_1_main_brush    "Ecovacs 01 Main Brush"    [ stateTopic="ecovacs/e136ef3d-b9b2-4b97-a246-d4de8d474fe9/components/brush" ]
+            Type number : ecovacs_1_side_brush    "Ecovacs 01 Side Brush"    [ stateTopic="ecovacs/e136ef3d-b9b2-4b97-a246-d4de8d474fe9/components/sideBrush" ]
+            Type number : ecovacs_1_filter        "Ecovacs 01 Filter"        [ stateTopic="ecovacs/e136ef3d-b9b2-4b97-a246-d4de8d474fe9/components/heap" ]
+            Type string : ecovacs_1_command       "Ecovacs 01 Command"       [ commandTopic="ecovacs/e136ef3d-b9b2-4b97-a246-d4de8d474fe9/command" ]
+            Type string : ecovacs_1_water_level   "Ecovacs 01 Water Level"   [ stateTopic="ecovacs/e136ef3d-b9b2-4b97-a246-d4de8d474fe9/water_level" ]
+            Type switch : ecovacs_1_mop_attached  "Ecovacs 01 Mop attached"  [ stateTopic="ecovacs/e136ef3d-b9b2-4b97-a246-d4de8d474fe9/mop_attached" ]
+            Type number : ecovacs_1_stats_area    "Ecovacs 01 Status Area"   [ stateTopic="ecovacs/e136ef3d-b9b2-4b97-a246-d4de8d474fe9/stats_area"]
+            Type number : ecovacs_1_stats_time    "Ecovacs 01 Status Time"   [ stateTopic="ecovacs/e136ef3d-b9b2-4b97-a246-d4de8d474fe9/stats_time"]
+            Type string : ecovacs_1_stats_type    "Ecovacs 01 Status Type"   [ stateTopic="ecovacs/e136ef3d-b9b2-4b97-a246-d4de8d474fe9/stats_type"]
+            Type string : ecovacs_1_last_clean_image "Ecovacs 01 Lase Cleaning Image" [ stateTopic="ecovacs/e136ef3d-b9b2-4b97-a246-d4de8d474fe9/last_clean_image"]
+        }
+}

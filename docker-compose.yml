@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  openhabdeebot:
+    image: openhabdeebot
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment: 
+      - email=${email}
+      - password=${password}
+      - device_id=${device_id}
+      - country=${country}
+      - continent=${continent}
+      - verify_ssl=${verify_ssl}
+      - mqtt_client_id=${mqtt_client_id}
+      - mqtt_client_host=${mqtt_client_host}
+      - mqtt_client_port=${mqtt_client_port}
+      - mqtt_client_keepalive=${mqtt_client_keepalive}
+      - mqtt_client_bind_address=${mqtt_client_bind_address}
+      - mqtt_client_root_topic=${mqtt_client_root_topic}
