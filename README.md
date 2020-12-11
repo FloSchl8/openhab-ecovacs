@@ -15,7 +15,7 @@ There are two methods of running this library:
 ### Docker
 
 The easiest was is to use docker-compose. For the library to work, you have to specify some configuration values in an _.env_-File (see [docker docs](https://docs.docker.com/compose/environment-variables/)).  
-The _.env_-File must contain the following variables
+The _.env_-File must contain the following variables.
 
 ```
 email=your_ecovacs_email
@@ -36,7 +36,10 @@ You can check the correct values afterwards with `docker-compose config`. If eve
 
 ### Python
 
-Set the above mentioned environment variales and run `python main.py`
+1. Clone the repository 
+2. Create an enviroment
+3. Activate the repository and install the requiremts with pip from requieremts.txt
+4. Set the above mentioned environment variales and run `python main.py`
 
 ## Usage
 
