@@ -20,6 +20,8 @@ config = {
     'mqtt_client_id' : os.environ.get('mqtt_client_id',''),
     'mqtt_client_host' : os.environ.get('mqtt_client_host',''),
     'mqtt_client_port' : os.environ.get('mqtt_client_port',''),
+    'mqtt_client_username' : os.environ.get('mqtt_client_username', ''),
+    'mqtt_client_password' : os.environ.get('mqtt_client_password', ''),
     'mqtt_client_keepalive' : os.environ.get('mqtt_client_keepalive',''),
     'mqtt_client_bind_address' : os.environ.get('mqtt_client_bind_address',''),
     'mqtt_client_root_topic' : os.environ.get('mqtt_client_root_topic','')
@@ -40,6 +42,7 @@ vacbot.connect_and_wait_until_ready()
 
 # MQTT INIT
 mqttclient = mqtt.Client(config['mqtt_client_id'])
+mqttclient.username_pw_set(config['mqtt_client_username'], config['mqtt_client_password'])
 mqttclient.connect(host=config['mqtt_client_host'], port=int(config['mqtt_client_port']), keepalive=int(config['mqtt_client_keepalive']),bind_address=config['mqtt_client_bind_address'])
 
 
