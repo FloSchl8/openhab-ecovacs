@@ -48,9 +48,12 @@ vacbot = ObservableVacBot(api.uid, api.REALM, api.resource, api.user_access_toke
 vacbot.connect_and_wait_until_ready()
 
 # MQTT INIT
-mqttclient = mqtt.Client(config['mqtt_client_id'])
-mqttclient.username_pw_set(config['mqtt_client_username'], config['mqtt_client_password'])
-mqttclient.connect(host=config['mqtt_client_host'], port=int(config['mqtt_client_port']), keepalive=int(config['mqtt_client_keepalive']),bind_address=config['mqtt_client_bind_address'])
+try:
+    mqttclient = mqtt.Client(config['mqtt_client_id'])
+    mqttclient.username_pw_set(config['mqtt_client_username'], config['mqtt_client_password'])
+    mqttclient.connect(host=config['mqtt_client_host'], port=int(config['mqtt_client_port']), keepalive=int(config['mqtt_client_keepalive']),bind_address=config['mqtt_client_bind_address'])
+except e:
+    print("Could not connect to MQTT Server {}: {}".format(config["mqtt_client_host"], repr(e))
 
 
 
