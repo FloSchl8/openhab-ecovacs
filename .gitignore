@@ -148,3 +148,5 @@ cython_debug/
 .history/
 /.vs/ProjectSettings.json
 /.vs/slnx.sqlite
+/.vs/openhab-ecovacs/v16
+/.vs
