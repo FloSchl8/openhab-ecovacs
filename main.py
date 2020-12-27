@@ -27,14 +27,21 @@ config = {
     'mqtt_client_root_topic' : os.environ.get('mqtt_client_root_topic','')
 }
 
-# init the api
-api = EcoVacsAPI(config['device_id'], config['email'], EcoVacsAPI.md5(config['password']),  config['country'], config['continent'])
+try:
+    # init the api
+    api = EcoVacsAPI(config['device_id'], config['email'], EcoVacsAPI.md5(config['password']),  config['country'], config['continent'])
 
-# first device in list
-my_vac = api.devices()[0]
+    # first device in list
+    my_vac = api.devices()[0]
+except e:
+    print(repr(e))
 # Device ID for a future multi device version
-did=str(my_vac['did'])
-print("Device ID: "+did)
+if my_vac is not None:
+    did=str(my_vac['did'])
+    print("Device ID: "+did)
+else: 
+    print("Could not connect to EcoVaps {}".format(config['device_id']))
+
 
 
 vacbot = ObservableVacBot(api.uid, api.REALM, api.resource, api.user_access_token, my_vac, config['continent'])
