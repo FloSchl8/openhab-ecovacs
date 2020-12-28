@@ -35,7 +35,18 @@ class ObservableVacBot(VacBot):
         self.waterEvents.notify(event=(self.water_level, self.mop_attached))
 
     def _handle_clean_report(self, event):
-        VacBot._handle_clean_report(self, event)
+        
+        response = event['body']['data']
+        if response['state'] == 'clean':
+            if response['trigger'] == 'app' or response['trigger'] == 'shed':
+                if response['cleanState']['motionState'] == 'working':
+                    self.vacuum_status = 'STATE_CLEANING'
+                elif response['cleanState']['motionState'] == 'pause':
+                    self.vacuum_status = 'STATE_PAUSED'
+                else:
+                    self.vacuum_status = 'STATE_RETURNING'
+            elif response['trigger'] == 'alert':
+                self.vacuum_status = 'STATE_ERROR'
         self.statusEvents.notify(self.vacuum_status)
 
     def _handle_battery_info(self, event):

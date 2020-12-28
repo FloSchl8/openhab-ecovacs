@@ -10,6 +10,7 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
+            "justMyCode": false,
             "env": {
                 "email": "your_ecovacs_email",
                 "password": "ecovacs_password",
