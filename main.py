@@ -5,9 +5,17 @@ import paho.mqtt.publish as publish
 import paho.mqtt.client as mqtt
 import json
 import os
+import sys
+import logging
 import time
 
 from ObservableVacBot import *
+
+log = logging.getLogger(__name__)
+out_hdlr = logging.StreamHandler(sys.stdout)
+out_hdlr.setFormatter(logging.Formatter('%(asctime)s %(message)s'))
+log.addHandler(out_hdlr)
+
 
 # reading config from env
 config = {
@@ -34,18 +42,20 @@ try:
     # first device in list
     my_vac = api.devices()[0]
 except e:
-    print(repr(e))
+    log.error("Could not open Ecovacs API", exc_info=e)
 # Device ID for a future multi device version
 if my_vac is not None:
     did=str(my_vac['did'])
-    print("Device ID: "+did)
+    log.debug("Device ID: "+did)
 else: 
-    print("Could not connect to EcoVaps {}".format(config['device_id']))
+    log.error("Could not connect to EcoVaps {}".format(config['device_id']))
 
 
-
-vacbot = ObservableVacBot(api.uid, api.REALM, api.resource, api.user_access_token, my_vac, config['continent'])
-vacbot.connect_and_wait_until_ready()
+try:
+    vacbot = ObservableVacBot(api.uid, api.REALM, api.resource, api.user_access_token, my_vac, config['continent'])
+    vacbot.connect_and_wait_until_ready()
+except e:
+    log.error("Could not connect to Deebot", exc_info=e)
 
 # MQTT INIT
 try:
@@ -53,7 +63,7 @@ try:
     mqttclient.username_pw_set(config['mqtt_client_username'], config['mqtt_client_password'])
     mqttclient.connect(host=config['mqtt_client_host'], port=int(config['mqtt_client_port']), keepalive=int(config['mqtt_client_keepalive']),bind_address=config['mqtt_client_bind_address'])
 except e:
-    print("Could not connect to MQTT Server {}: {}".format(config["mqtt_client_host"], repr(e))
+    log.error("Could not connect to MQTT Server {}".format(config["mqtt_client_host"], exc_info=e)
 
 
 
@@ -117,13 +127,13 @@ def stats_events_report(event):
 def error_report(event):
     error_str=str(event)
     mqttpublish(did,"error",error_str)
-    print("Error: "+error_str)
+    log.error("Error: "+error_str)
 
 
 # Publish to MQTT. Root topic should be in a config file or at least defined at the top.
 def mqttpublish(did,subtopic,message):
     topic=config['mqtt_client_root_topic']+"/"+did+"/"+subtopic
-    print(topic, message)
+    log.debug(topic, message)
     mqttclient.publish(topic, message)
 
 vacbot.errorEvents.subscribe(error_report)
@@ -146,15 +156,15 @@ vacbot.refresh_components()
 ## MQTT ----> Ecovacs
 # Subscribe to this ecovac topics, translate mqtt commands into sucks commands to robot
 subscribe_topic=config['mqtt_client_root_topic']+"/"+did+"/command"
-print("Subscribe topic: "+subscribe_topic)
+log.debug("Subscribe topic: "+subscribe_topic)
 mqttclient.subscribe(subscribe_topic)
 
 def on_message(client, userdata, message):
     received_command=str(message.payload.decode("utf-8")).lstrip()
-    print("message received=-"+received_command+"-")
-    print("message topic=",message.topic)
-    print("message qos=",message.qos)
-    print("message retain flag=",message.retain)
+    log.debug("message received=-"+received_command+"-")
+    log.debug("message topic=",message.topic)
+    log.debug("message qos=",message.qos)
+    log.debug("message retain flag=",message.retain)
     if received_command == "Clean":  
         vacbot.Clean()
     elif received_command == "CleanPause":
@@ -181,7 +191,7 @@ def on_message(client, userdata, message):
         pass
         #vacbot.SetWaterLevel()
     else:
-        print("Unknown command")
+        log.debug("Unknown command")
         
 mqttclient.on_message=on_message
 
