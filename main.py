@@ -14,7 +14,7 @@ from ObservableVacBot import *
 
 logging.basicConfig(stream=sys.stdout, format='%(asctime)s: %(name)s %(levelname)s: %(message)s')
 log = logging.getLogger(__name__)
-log.level = logging.DEBUG
+log.level = logging.INFO
 
 # reading config from env
 config = {
@@ -140,7 +140,7 @@ def mqttpublish(did,subtopic,message):
     topic=config['mqtt_client_root_topic']+"/"+did+"/"+subtopic
     try:
         mqttclient.publish(topic, message)
-        log.debug("Published message \'{}\' to topic \'{}\'".format(message, topic))
+        log.info("Published message \'{}\' to topic \'{}\'".format(message, topic))
     except e:
         log.error("Error publishing MQTT message", exc_info=e)
 
