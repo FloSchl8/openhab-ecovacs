@@ -62,7 +62,9 @@ try:
     log.debug("Connecting to MQTT host {} with user {}".format(config['mqtt_client_host'], config['mqtt_client_username']))
     mqttclient = mqtt.Client(config['mqtt_client_id'])
     mqttclient.enable_logger(logger=logging.getLogger('mqtt_client'))
-    mqttclient.username_pw_set(config['mqtt_client_username'], config['mqtt_client_password'])
+    if config['mqtt_client_username']:
+        log.debug("MQTT User \'{}\' supplied, using it to log in to MQTT server".format(config['mqtt_client_username']))
+        mqttclient.username_pw_set(config['mqtt_client_username'], config['mqtt_client_password'])
     mqttclient.connect(host=config['mqtt_client_host'], port=int(config['mqtt_client_port']), keepalive=int(config['mqtt_client_keepalive']),bind_address=config['mqtt_client_bind_address'])
     log.debug("Connected to MQTT host")
     
