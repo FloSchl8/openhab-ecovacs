@@ -34,6 +34,7 @@ config = {
     'mqtt_client_root_topic' : os.environ.get('mqtt_client_root_topic','')
 }
 
+log.debug("Starting with configuration: {}".format(str(config)))
 try:
     # init the api
     api = EcoVacsAPI(config['device_id'], config['email'], EcoVacsAPI.md5(config['password']),  config['country'], config['continent'])
