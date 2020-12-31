@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+    restart: unless-stopped
+    container_name: openhabdeebot
     environment: 
       - email=${email}
       - password=${password}

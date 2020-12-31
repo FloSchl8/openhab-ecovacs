@@ -11,11 +11,10 @@ import time
 
 from ObservableVacBot import *
 
-log = logging.getLogger(__name__)
-out_hdlr = logging.StreamHandler(sys.stdout)
-out_hdlr.setFormatter(logging.Formatter('%(asctime)s %(message)s'))
-log.addHandler(out_hdlr)
 
+logging.basicConfig(stream=sys.stdout, format='%(asctime)s %(levelname)s %(message)s')
+log = logging.getLogger(__name__)
+log.level = logging.DEBUG
 
 # reading config from env
 config = {
