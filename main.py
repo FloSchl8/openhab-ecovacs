@@ -133,8 +133,11 @@ def error_report(event):
 # Publish to MQTT. Root topic should be in a config file or at least defined at the top.
 def mqttpublish(did,subtopic,message):
     topic=config['mqtt_client_root_topic']+"/"+did+"/"+subtopic
-    log.debug(topic, message)
-    mqttclient.publish(topic, message)
+    log.debug("Publishing message \'{}\' to topic ".format(topic, message))
+    try:
+        mqttclient.publish(topic, message)
+    except e:
+        log.error("Error publishing MQTT message", exc_info=e)
 
 vacbot.errorEvents.subscribe(error_report)
 vacbot.lifespanEvents.subscribe(lifespan_report)
