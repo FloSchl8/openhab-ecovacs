@@ -62,13 +62,14 @@ try:
     mqttclient.username_pw_set(config['mqtt_client_username'], config['mqtt_client_password'])
     mqttclient.connect(host=config['mqtt_client_host'], port=int(config['mqtt_client_port']), keepalive=int(config['mqtt_client_keepalive']),bind_address=config['mqtt_client_bind_address'])
 except e:
-    log.error("Could not connect to MQTT Server {}".format(config["mqtt_client_host"], exc_info=e)
+    log.error("Could not connect to MQTT Server {}".format(config["mqtt_client_host"], exc_info=e))
 
 
 
 ## ECOVACS ---> MQTT
 ## Callback functions. Triggered when sucks receives a status change from Ecovacs.
-# Callback function for battery events
+
+## Callback function for battery events 
 def battery_report(level):    
     mqttpublish(did,"battery_level",str(level))
 
