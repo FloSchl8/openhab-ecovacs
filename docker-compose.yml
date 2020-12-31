@@ -18,6 +18,8 @@ services:
       - mqtt_client_id=${mqtt_client_id}
       - mqtt_client_host=${mqtt_client_host}
       - mqtt_client_port=${mqtt_client_port}
+      - mqtt_client_username=${mqtt_client_username}
+      - mqtt_client_password=${mqtt_client_password}
       - mqtt_client_keepalive=${mqtt_client_keepalive}
       - mqtt_client_bind_address=${mqtt_client_bind_address}
       - mqtt_client_root_topic=${mqtt_client_root_topic}
