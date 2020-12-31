@@ -12,7 +12,7 @@ import time
 from ObservableVacBot import *
 
 
-logging.basicConfig(stream=sys.stdout, format='%(asctime)s %(levelname)s %(message)s')
+logging.basicConfig(stream=sys.stdout, format='%(asctime)s: %(name)s %(levelname)s: %(message)s')
 log = logging.getLogger(__name__)
 log.level = logging.DEBUG
 
@@ -133,7 +133,7 @@ def error_report(event):
 # Publish to MQTT. Root topic should be in a config file or at least defined at the top.
 def mqttpublish(did,subtopic,message):
     topic=config['mqtt_client_root_topic']+"/"+did+"/"+subtopic
-    log.debug("Publishing message \'{}\' to topic ".format(topic, message))
+    log.debug("Publishing message \'{}\' to topic \'{}\'".format(message, topic))
     try:
         mqttclient.publish(topic, message)
     except e:
