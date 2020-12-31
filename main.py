@@ -58,9 +58,13 @@ except e:
 
 # MQTT INIT
 try:
+    log.debug("Connecting to MQTT host {} with user {}".format(config['mqtt_client_host'], config['mqtt_client_username']))
     mqttclient = mqtt.Client(config['mqtt_client_id'])
+    mqttclient.enable_logger(logger=logging.getLogger('mqtt_client'))
     mqttclient.username_pw_set(config['mqtt_client_username'], config['mqtt_client_password'])
     mqttclient.connect(host=config['mqtt_client_host'], port=int(config['mqtt_client_port']), keepalive=int(config['mqtt_client_keepalive']),bind_address=config['mqtt_client_bind_address'])
+    log.debug("Connected to MQTT host")
+    
 except e:
     log.error("Could not connect to MQTT Server {}".format(config["mqtt_client_host"], exc_info=e))
 
@@ -133,9 +137,9 @@ def error_report(event):
 # Publish to MQTT. Root topic should be in a config file or at least defined at the top.
 def mqttpublish(did,subtopic,message):
     topic=config['mqtt_client_root_topic']+"/"+did+"/"+subtopic
-    log.debug("Publishing message \'{}\' to topic \'{}\'".format(message, topic))
     try:
         mqttclient.publish(topic, message)
+        log.debug("Published message \'{}\' to topic \'{}\'".format(message, topic))
     except e:
         log.error("Error publishing MQTT message", exc_info=e)
 
