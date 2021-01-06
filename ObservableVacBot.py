@@ -38,7 +38,7 @@ class ObservableVacBot(VacBot):
         
         response = event['body']['data']
         if response['state'] == 'clean':
-            if response['trigger'] == 'app' or response['trigger'] == 'shed':
+            if response['trigger'] == 'app' or response['trigger'] == 'shed' or response['trigger'] == 'button':
                 if response['cleanState']['motionState'] == 'working':
                     self.vacuum_status = 'STATE_CLEANING'
                 elif response['cleanState']['motionState'] == 'pause':

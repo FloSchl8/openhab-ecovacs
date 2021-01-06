@@ -34,6 +34,17 @@ mqtt_client_bind_address=
 mqtt_client_root_topic=root_topic_name
 ```
 
+Country and continent must be in two-letter code, e. g. for USA
+
+```
+    country code: us
+    continent code: na
+```
+
+(If it doesn't appear to work for your continent, try "ww", their world-wide catchall.)
+See [Wikipedia](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2?oldformat=true#Officially_assigned_code_elements)
+
+
 You can check the correct values afterwards with `docker-compose config`. If everything is correct you can start the container with `docker-compose up [-d]`
 
 ### Python
@@ -100,7 +111,7 @@ For easier use, you can use the provided examples in [openhab](/openhab)
 ## Thanks
 
 If you want to support me  
-<a href="https://www.buymeacoffee.com/FloSchl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+<a href="https://www.buymeacoffee.com/FloSchl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 35px !important;width: 150px !important;" ></a>
 
 My heartfelt thanks to:
 
