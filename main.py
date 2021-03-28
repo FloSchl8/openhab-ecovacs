@@ -162,6 +162,11 @@ vacbot.setScheduleUpdates()
 vacbot.refresh_statuses()
 vacbot.refresh_components()
 
+rooms = "Known rooms:\n"
+for room in vacbot.getSavedRooms():
+    rooms += "\t id={} type={}\n".format(room['id'], room['subtype'])
+
+log.info(rooms)
 
 ## MQTT ----> Ecovacs
 # Subscribe to this ecovac topics, translate mqtt commands into sucks commands to robot
@@ -192,9 +197,11 @@ def on_message(client, userdata, message):
     elif received_command == "CustomArea":
         pass
         #vacbot.CustomArea()
-    elif received_command == "SpotArea":
+    elif received_command.startswith("SpotArea:"):
+        area = received_command[9:]
+        log.info("Cleaing area: " + area)
         pass
-        #vacbot.SpotArea()
+        vacbot.SpotArea(area)
     elif received_command == "SetFanSpeed":
         vacbot.SetFanSpeed(speed=0)
     elif received_command == "SetWaterLevel":
