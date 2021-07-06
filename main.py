@@ -162,11 +162,10 @@ vacbot.setScheduleUpdates()
 vacbot.refresh_statuses()
 vacbot.refresh_components()
 
-rooms = "Known rooms:\n"
+# Publish all known rooms by thier id and type
 for room in vacbot.getSavedRooms():
-    rooms += "\t id={} type={}\n".format(room['id'], room['subtype'])
+    mqttpublish(did, "rooms/{}".format(room['id']), room['subtype'])
 
-log.info(rooms)
 
 ## MQTT ----> Ecovacs
 # Subscribe to this ecovac topics, translate mqtt commands into sucks commands to robot
